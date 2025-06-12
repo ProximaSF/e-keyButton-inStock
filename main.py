@@ -36,7 +36,7 @@ def item_stock_checker():
             drop_down_elem.click()
 
             #print("Find \"e\" option")
-            e_option_elem = driver.find_element(By.CSS_SELECTOR, 'option[value="key-e"]')
+            e_option_elem = driver.find_element(By.CSS_SELECTOR, 'option[value="key-z"]')
             e_option_elem.click()
             drop_down_elem.click() # close dropdown
 
@@ -54,7 +54,7 @@ def item_stock_checker():
                         title = ''
                         msg = f"{counter}:{i}🟢: **IN STOCK**‼️‼️‼️"
                         send_webhook_msg(title, msg)
-                        time.sleep(5)
+                        time.sleep(10)
                 counter += 1
             else:
                 print("Out of Stock")
