@@ -66,7 +66,7 @@ def item_stock_checker():
         send_webhook_msg("**CODE ERROR**", str(e))
 
 def main():
-    schedule.every(10).minutes.do(item_stock_checker)
+    schedule.every(5).minutes.do(item_stock_checker)
     item_stock_checker()
     while True:
         schedule.run_pending()
