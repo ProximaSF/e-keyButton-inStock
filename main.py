@@ -41,29 +41,29 @@ def item_stock_checker():
             drop_down_elem.click() # close dropdown
 
             #print("Check if item in stock")
-            check_stock = driver.find_element(By.CSS_SELECTOR, 'button[class="single_add_to_cart_button button alt wp-element-button disabled wc-variation-is-unavailable"]')
+            check_in_stock = driver.find_element(By.CSS_SELECTOR, 'button[class*="single_add_to_cart_button"]') # * -> find common part string
 
-            if check_stock:
+            if check_in_stock:
                 #print("Find item stock info")
-                button_text = check_stock.text
+                button_text = check_in_stock.text
                 print(button_text)
                 instock = True if "Out" not in button_text else False
                 if instock:
-                    title = ''
-                    msg = f"{counter}🟢: IN STOCK!"
-                    send_webhook_msg(title, msg)
-                else:
-                    title = ''
-                    msg = f"{counter}🔴: Not in stock"
-                    send_webhook_msg(title, msg)
-
+                    # Look at me BOI!
+                    for i in range(1, 20):
+                        title = ''
+                        msg = f"{counter}:{i}🟢: **IN STOCK**‼️‼️‼️"
+                        send_webhook_msg(title, msg)
+                        time.sleep(5)
                 counter += 1
+            else:
+                print("Out of Stock")
+
         else:
             print("Image not found")
     except Exception as e:
         print("/n/n")
         send_webhook_msg("**CODE ERROR**", str(e))
-        exit()
 
 def main():
     schedule.every(10).minutes.do(item_stock_checker)
